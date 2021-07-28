@@ -14,20 +14,20 @@ Below are the list of the supported parameters.
 ## GET parameter
 1. year (can be any one from the dataset season)
 2. size (Input selection like top 1 team ex size=1)
-3. location 
-4. toss_decision 
-5. win_by_runs
+3. location (it's boolean)
+4. toss_decision (It's boolean)
+5. win_by_runs (It's boolean)
 
 
 http://127.0.0.1:8000/api/match/**<winner_type>** it can be changed based on the column name present in the dataset.
 
 ## Solution (Year & size params are dynamic)
 
-Choose season (years) and get these stats:
+### Choose season (years) and get these stats:
     • Top 4 teams in terms of wins
         Top 4 team in the selected Season: http://127.0.0.1:8000/api/match/winner?size=4&year=2012
         Top 4 team in All Season: http://127.0.0.1:8000/api/match/winner?size=4
-        Other:
+        ### Other:
         In All Season: http://127.0.0.1:8000/api/match/winner
         In Selected or specific season: http://127.0.0.1:8000/api/match/winner?year=2008
     • Which team won the most number of tosses in the season
