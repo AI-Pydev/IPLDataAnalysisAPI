@@ -1,7 +1,8 @@
 # IPLDataAnalysisAPI
 
-Steps:
+This repo contains both Django & jupyter notebook (IPL Data Analysis.ipynb)
 
+Steps:
 pip install -r requirements.txt
 
 ./manage.py runserver 
