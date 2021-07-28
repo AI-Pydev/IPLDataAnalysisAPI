@@ -31,9 +31,15 @@ class ReadDataFile:
 
 class Match(APIView):
 
-    def winner_team(self, winner_type, year, size, location=False, toss_decision=None, win_by_runs=None):
+    def winner_team(self, winner_type):
         obj = ReadDataFile()
         matches = obj.read_matches()
+        year = int(self.request.query_params.get('year', 0))
+        size = int(self.request.query_params.get('size', 0))
+        location = self.request.query_params.get('location', False)
+        toss_decision = self.request.query_params.get('toss_decision', None)
+        win_by_runs = self.request.query_params.get('win_by_runs', None)
+        win_by_wickets = self.request.query_params.get('win_by_wickets', None)
         if winner_type not in matches.columns:
             raise ValueError
         # Winning summary for all the season
@@ -47,7 +53,8 @@ class Match(APIView):
             data = data.toss_decision.value_counts(normalize=True).mul(100).round(2).astype(str) + "%"
         elif win_by_runs:
             data = data[['win_by_runs', 'winner']].sort_values(by='win_by_runs', ascending=False)['winner']
-            # data = data.iloc[data['win_by_runs'].idxmax()]
+        elif win_by_wickets:
+            data = data[['win_by_wickets', 'winner']].sort_values(by='win_by_wickets', ascending=False)['winner']
         else:
             data = data.groupby(winner_type)[winner_type].count().sort_values(ascending=False)
 
@@ -56,10 +63,5 @@ class Match(APIView):
         return data
 
     def get(self, request, winner_type):
-        year = int(self.request.query_params.get('year', 0))
-        size = int(self.request.query_params.get('size', 0))
-        location = self.request.query_params.get('location', False)
-        toss_decision = self.request.query_params.get('toss_decision', None)
-        win_by_runs = self.request.query_params.get('win_by_runs', None)
-        data = self.winner_team(winner_type, year, size, location, toss_decision, win_by_runs)
+        data = self.winner_team(winner_type)
         return Response(data=json.loads(data.to_json()))
