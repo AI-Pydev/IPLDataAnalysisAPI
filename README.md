@@ -1,5 +1,5 @@
 # IPLDataAnalysisAPI
-
+Heroku url - https://analysis-ipl.herokuapp.com/api/match/winner
 This repo contains both Django & jupyter notebook (IPL Data Analysis.ipynb)
 
 Steps:
@@ -68,8 +68,16 @@ http://127.0.0.1:8000/api/match/**<winner_type>** it can be changed based on the
         In All Season: http://127.0.0.1:8000/api/match/venue
         In Selected or specific season: http://127.0.0.1:8000/api/match/venue?year=2008
     • Which team won by the highest margin of runs  for the season
-        All Season: http://127.0.0.1:8000/api/match/winner?win_by_runs=1&size=1
-        Selected Season: http://127.0.0.1:8000/api/match/winner?win_by_runs=1&year=2012
+        All Season: http://127.0.0.1:8000/api/match/win_by_runs
+        Selected Season: http://127.0.0.1:8000/api/match/win_by_runs?year=2012
         Other:
-        In All Season: http://127.0.0.1:8000/api/match/winner?win_by_runs=1
-        In Selected or specific season: http://127.0.0.1:8000/api/match/winner?win_by_runs=1&year=2008
+        In All Season: http://127.0.0.1:8000/api/match/win_by_runs
+        In Selected or specific season: http://127.0.0.1:8000/api/match/win_by_runs?year=2008
+    • Which team won by the highest number of wickets for the season
+        Selected Season: http://127.0.0.1:8000/api/match/win_by_wickets?year=2012
+    • How many times has a team won the toss and the match
+        Selected Season: http://127.0.0.1:8000/api/match/winner?win_toss_and_match=1
+    • Which Batsman gave away the most number of runs in a match for the selected season
+        Selected Season: http://127.0.0.1:8000/api/match/batsman?year=2012&size=1
+    • Most number of catches by a fielder in a match for the selected season
+        Selected Season: http://127.0.0.1:8000/api/match/fielder?year=2012&size=1    
